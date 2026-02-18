@@ -4,8 +4,7 @@
       xml:lang="{{ site.Language.Name }}">
   <head>
     <title>{{ .Site.Params.title }}: {{ .Title }}</title>
-{{ $css := resources.Get "EPUB/css/epub.css" }}
-<link rel="stylesheet" href="{{ $css.RelPermalink }}">
+<link rel="stylesheet" href="/EPUB/epub.css">
   </head>
   <body ops:type="chapter">
 <h1>{{ .Title }}</h1>
