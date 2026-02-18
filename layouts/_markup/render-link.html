@@ -1,0 +1,32 @@
+{{- $destination := .Destination -}}
+{{- if eq $destination "ADD_REF" -}}
+  {{- warnf "Missing reference for link [%s](%s) in page %s" (.Text | htmlUnescape) $destination .Page.Path -}}
+  {{- .Text -}}
+{{- else if lt (len .Destination) 5 -}}
+  <{{ .Destination }} {{ with .Title }}title="{{ . }}"{{ end }} tabindex=0>{{- .Text -}}</{{ .Destination }}>
+{{- else if findRE `^((https?|ftp):\/\/[\w.-]+(:\d+)?(\/[\w\-._~:/?#[\]@!$&'()*+,;=%]*)?|\.?\/?[\w\-./]*(#[^\s\t\r\n]*)?)$` $destination -}}
+  {{- $isRemote := strings.Contains $destination "://" -}}
+  {{- if $isRemote -}}
+    {{- with .Page.Store.Get "heading" -}}
+      {{- $m := dict "headingID" .id "headingPlainText" .plainText "headingText" .text "linkDestination" $.Destination "linkText" $.Text "linkTitle" $.Title -}}
+      {{- $.Page.Store.Add "links" $m -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $url := urls.Parse .Destination -}}
+    {{- $page := .Page.GetPage $url.Path -}}
+    {{- $fragment := $url.Fragment -}}
+    {{- if $page -}}
+      {{- $destination = $page.RelPermalink -}}
+      {{- with $fragment -}}
+        {{- $destination = print $destination "#" $fragment -}}
+      {{- end -}}
+    {{- else -}}
+      {{- with resources.Get .Destination -}}
+        {{- $destination = .RelPermalink -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  <a href="{{- $destination -}}" {{- if $isRemote -}}rel="external nofollow" target="_blank" {{- with .Title -}}aria-label="{{- . -}}" data-pagefind-index-attrs="aria-label"{{- end -}}{{- end -}}>{{- .Text -}}</a>
+{{- else -}}
+  {{- errorf "Invalid destination: %s" $destination -}}
+{{- end -}}

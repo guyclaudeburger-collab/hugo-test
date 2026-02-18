@@ -1,0 +1,60 @@
+baseURL = "/"
+DefaultContentLanguage = "en"
+languageCode = "en-EN"
+title = "Ebook-Generator"
+disableKinds = ["RSS", "robotsTXT", "404", "taxonomy", "section", "term", "sitemap"]
+uglyurls = true
+relativeURLs = true
+disablePathToLower = true
+
+[mediaTypes]
+  [mediaTypes."application/xhtml+xml"]
+    suffixes = ["xhtml"]
+  [mediaTypes."application/opf+xml"]
+    suffixes = ["opf"]
+
+[markup.tableOfContents]
+	startLevel = 1
+	endLevel = 2
+	ordered = true
+    
+[outputFormats]
+  [outputFormats.XHTML]
+    mediaType = "application/xhtml+xml"
+    isHTML = true
+    path = "EPUB"
+    permalinkable = true
+  [outputFormats.OPF]
+    mediaType = "application/opf+xml"
+    permalinkable = true
+    path = "EPUB"
+    baseName = "package"
+
+[outputs]
+  page = ["XHTML"]
+  home = ["OPF"]
+
+[permalinks]
+contentDir = 'content'
+"chapters" = '/:slugorcontentbasename/'
+  
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      definitionList = true
+      footnote = true
+      linkify = true
+      strikethrough = true
+      table = true
+      taskList = true
+      typographer = false
+    [markup.goldmark.parser]
+      attribute = true
+      autoHeadingID = false
+    [markup.goldmark.renderer]
+      hardWraps = false
+      xHTML = true
+      
+[params]
+  cover = "cover.jpg"
+  subject = ['HUGO', 'Epub', 'Ebook'] # (optional)

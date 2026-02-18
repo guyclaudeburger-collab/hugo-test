@@ -1,0 +1,22 @@
+{{- $destination := urls.Parse .Destination -}}
+{{- $img := "" -}}
+{{- if strings.Contains $destination "http" -}}
+  {{- $remote := try (resources.GetRemote $destination.String) -}}
+  {{- with $remote.Value -}}
+    {{- $img = . -}}
+  {{- else -}}
+    {{- errorf "Remote resource not found: %s" $destination -}}
+  {{- end -}}
+{{- else -}}
+  {{- with .Page.Resources.Get $destination.String -}}
+    {{- $img = . -}}
+  {{- else with resources.Get (print "EPUB/images/" $destination.String) -}}
+  	 {{ $img = . }}
+  {{- else -}}
+	{{ errorf "Invalid media %s %s" .Destination $.Page.File.Path }}
+  {{- end -}}
+{{- end -}}
+<figure {{ with .Attributes.id }}id="{{ . }}"{{ end }} {{ with .Attributes.class }}class="{{ . }}"{{ end }}>
+{{- with .Title -}}<figcaption>{{.|$.Page.RenderString}}{{- with .Attributes.cite}}, <cite>{{.|$.Page.RenderString}}</cite>{{- end}}{{- with .Attributes.author}}, <span>{{.}}</span>{{- end}}</figcaption>{{- end}}
+<img src="{{- $img.Permalink -}}" alt="{{- with .Text -}}{{- . | htmlUnescape -}}{{else}}See the figcaption{{- end}}" {{- with $img -}}width="{{- .Width -}}" height="{{- .Height -}}"{{- end -}}>
+</figure>
