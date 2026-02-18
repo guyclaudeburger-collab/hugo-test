@@ -17,10 +17,11 @@ xmlns:dcterms="http://purl.org/dc/terms/" version="3.0" xml:lang="{{ site.Langua
 </metadata>
 <manifest>
 <item id="htmltoc" properties="nav" media-type="application/xhtml+xml" href="{{- (resources.Get "/EPUB/toc.xhtml" | resources.ExecuteAsTemplate "/EPUB/toc.xhtml" $.Page).RelPermalink -}}"/>
-{{ with .Resources.Get "/EPUB/cover.xhtml" }}
-  <item id="cover" href="{{- (resources.ExecuteAsTemplate . "EPUB/cover.xhtml" $.Page).Permalink }}" />
+{{ with $cover := resources.Get "EPUB/cover.xhtml" }}
+  <item id="cover" href="{{ (resources.ExecuteAsTemplate "EPUB/cover.xhtml" $.Page $cover).RelPermalink }}"/>
+{{ else }}
+  {{ errorf "No assets/EPUB/cover.xhtml" }}
 {{ end }}
-
 <item id="cover-image" properties="cover-image" href="{{ relURL "epub/images/cover.jpg" }}" media-type="image/jpeg" />
 {{ range site.RegularPages }}
 <item id="{{ .File.UniqueID }}" href="{{ .RelPermalink }}" media-type="application/xhtml+xml"/>
