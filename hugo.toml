@@ -56,5 +56,4 @@ contentDir = 'content'
       xHTML = true
       
 [params]
-  cover = "cover.jpg"
   subject = ['HUGO', 'Epub', 'Ebook'] # (optional)

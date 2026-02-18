@@ -20,27 +20,25 @@ xmlns:dcterms="http://purl.org/dc/terms/" version="3.0" xml:lang="{{ site.Langua
 {{ with .Resources.Get "/EPUB/cover.xhtml" }}
   <item id="cover" href="{{- (resources.ExecuteAsTemplate . "EPUB/cover.xhtml" $.Page).Permalink }}" />
 {{ end }}
+
+<item id="cover-image" properties="cover-image" href="{{ relURL "epub/images/cover.jpg" }}" media-type="image/jpeg" />
+{{ range site.RegularPages }}
+<item id="{{ .File.UniqueID }}" href="{{ .RelPermalink }}" media-type="application/xhtml+xml"/>
 {{ range resources.Match "**/*.css" }}
 {{ with resources.ExecuteAsTemplate .Name $.Page . -}}
   <item media-type="text/css" id="{{ .Name | anchorize }}" href="{{ .RelPermalink }}" />
 {{ end }}
 {{ end }}
-
-{{ with resources.Get site.Params.cover }}
-<item id="cover-image" properties="cover-image" href="{{ .Permalink }}" media-type="{{ .MediaType.Type }}" />
-{{ end }}
-{{ range site.RegularPages }}
-<item id="{{ .File.UniqueID }}" href="{{ .RelPermalink }}" media-type="application/xhtml+xml"/>
 {{ range .Resources }}
 <item id="{{ .Name | anchorize }}" href="{{ .RelPermalink }}" media-type="{{ .MediaType }}"/>
 {{ end }}
 {{ end }}
-{{ range (resources.Match "images") }}
-<item id="{{ .File.UniqueID }}" href="{{ .RelPermalink }}" media-type="{{ .MediaType }}"/>
+{{ range resources.Match "**/images/**" }}
+<item id="{{ .Name | anchorize }}" href="{{ .RelPermalink }}" media-type="{{ .MediaType }}"/>
 {{ end }}
 {{ range site.Data.fonts }}
 {{ with resources.Get .path }}
-<item id="EPUB.embedded.font.{{ .File.UniqueId }}" href="{{ .RelPermalink }}" media-type="{{ .MediaType }}"/>
+<item id="EPUB.embedded.font.{{ .Name | anchorize }}" href="{{ .RelPermalink }}" media-type="{{ .MediaType }}"/>
 {{ end }}
 {{ end }}
 </manifest>

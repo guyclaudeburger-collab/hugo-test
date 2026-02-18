@@ -5,12 +5,11 @@
 {{- if not $u.IsAbs -}}
   {{- with or (.Page.Resources.Get $u.Path) (resources.Get $u.Path) -}}
     {{- $img = . -}}
-    {{- $src = .RelPermalink -}}     # ← .RelPermalink, NOT .
+    {{- $src = .RelPermalink -}}
   {{- end -}}
 {{- else -}}
   {{ errorf "Absolute URL: %s" .Destination }}
 {{- end -}}
-
 <figure {{ with .Attributes.id }}id="{{ . }}"{{ end }} {{ with .Attributes.class }}class="{{ . }}"{{ end }}>
   {{- with .Title -}}
     <figcaption>{{ . | $.Page.RenderString }}
