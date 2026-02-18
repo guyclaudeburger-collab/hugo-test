@@ -16,29 +16,31 @@ xmlns:dcterms="http://purl.org/dc/terms/" version="3.0" xml:lang="{{ site.Langua
 <meta property="schema:accessibilityFeature">alternativeText</meta>
 </metadata>
 <manifest>
-<item id="htmltoc" properties="nav" media-type="application/xhtml+xml" href="{{- replace (resources.Get "/EPUB/toc.xhtml" | resources.ExecuteAsTemplate "/EPUB/toc.xhtml" $.Page).RelPermalink "/EPUB/" "" -}}"/>
-{{ range (resources.Match "EPUB/css/*.css") }}
-<item media-type="text/css" id="EPUB-css" href="{{- replace (resources.ExecuteAsTemplate . .File.BaseFileName $.Page).Permalink "/EPUB/" "" -}}" />
-{{ end }}
+<item id="htmltoc" properties="nav" media-type="application/xhtml+xml" href="{{- (resources.Get "/EPUB/toc.xhtml" | resources.ExecuteAsTemplate "/EPUB/toc.xhtml" $.Page).RelPermalink -}}"/>
 {{ with .Resources.Get "/EPUB/cover.xhtml" }}
-  <item id="cover" href="{{- replace (resources.ExecuteAsTemplate . "cover.xhtml" $.Page).Permalink "/EPUB/" "" -}}" />
+  <item id="cover" href="{{- (resources.ExecuteAsTemplate . "EPUB/cover.xhtml" $.Page).Permalink }}" />
+{{ end }}
+{{ range resources.Match "**/*.css" }}
+{{ with resources.ExecuteAsTemplate .Name $.Page . -}}
+  <item media-type="text/css" id="{{ .Name | anchorize }}" href="{{ .RelPermalink }}" />
+{{ end }}
 {{ end }}
 
 {{ with resources.Get site.Params.cover }}
-<item id="cover-image" properties="cover-image" href="{{ replace .Permalink "/EPUB/" }}" media-type="{{ .MediaType.Type }}" />
+<item id="cover-image" properties="cover-image" href="{{ .Permalink }}" media-type="{{ .MediaType.Type }}" />
 {{ end }}
 {{ range site.RegularPages }}
-<item id="{{ .File.UniqueID }}" href="{{ replace .RelPermalink "/EPUB/" "" }}" media-type="application/xhtml+xml"/>
+<item id="{{ .File.UniqueID }}" href="{{ .RelPermalink }}" media-type="application/xhtml+xml"/>
 {{ range .Resources }}
-<item id="{{ .Name | anchorize }}" href="{{ replace .RelPermalink "/EPUB/" "" }}" media-type="{{ .MediaType }}"/>
+<item id="{{ .Name | anchorize }}" href="{{ .RelPermalink }}" media-type="{{ .MediaType }}"/>
 {{ end }}
 {{ end }}
 {{ range (resources.Match "images") }}
-<item id="{{ .File.UniqueID }}" href="{{ replace .RelPermalink "/EPUB/" "" }}" media-type="{{ .MediaType }}"/>
+<item id="{{ .File.UniqueID }}" href="{{ .RelPermalink }}" media-type="{{ .MediaType }}"/>
 {{ end }}
 {{ range site.Data.fonts }}
 {{ with resources.Get .path }}
-<item id="EPUB.embedded.font.{{ .File.UniqueId }}" href="{{ replace .RelPermalink "/EPUB/" "" }}" media-type="{{ .MediaType }}"/>
+<item id="EPUB.embedded.font.{{ .File.UniqueId }}" href="{{ .RelPermalink }}" media-type="{{ .MediaType }}"/>
 {{ end }}
 {{ end }}
 </manifest>

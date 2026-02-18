@@ -4,7 +4,7 @@ languageCode = "en-EN"
 title = "Ebook-Generator"
 disableKinds = ["RSS", "robotsTXT", "404", "taxonomy", "section", "term", "sitemap"]
 uglyurls = true
-relativeURLs = true
+relativeurls = true
 disablePathToLower = true
 
 [mediaTypes]
@@ -26,8 +26,8 @@ disablePathToLower = true
     permalinkable = true
   [outputFormats.OPF]
     mediaType = "application/opf+xml"
-    permalinkable = true
     path = "EPUB"
+    permalinkable = true
     baseName = "package"
 
 [outputs]

@@ -2,7 +2,7 @@
 {{ range site.Data.fonts }}
 @font-face {
   font-family: "{{ .family }}";
-  src: local("{{ .family }}"), {{ with .alternative-name }}local("{{.}}"),{{ end }} url("epub/{{ .path }}") format("{{ .format }}");
+  src: local("{{ .family }}"), {{ with .alternativename }}local("{{.}}"),{{ end }} url("epub/{{ .path }}") format("{{ .format }}");
   font-display: swap;
 }
 {{ end }}
