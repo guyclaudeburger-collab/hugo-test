@@ -7,6 +7,8 @@ baseURL = "/"
 uglyurls = true
 disablePathToLower = true
 
+[params]
+  Description = "Theme to produce epub3 ebooks"
 [mediaTypes]
   [mediaTypes."application/xhtml+xml"]
     suffixes = ["xhtml"]
@@ -53,3 +55,5 @@ contentDir = 'content'
     [markup.goldmark.renderer]
       hardWraps = false
       xHTML = true
+[minify]
+  minifyOutput = true

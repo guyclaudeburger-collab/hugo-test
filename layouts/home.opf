@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <package xmlns="http://www.idpf.org/2007/opf" xmlns:dc="http://purl.org/dc/elements/1.1/"
-xmlns:dcterms="http://purl.org/dc/terms/" version="3.0" xml:lang="{{ site.Language.Name }}">
+xmlns:dcterms="http://purl.org/dc/terms/" version="3.0" xml:lang="{{ site.Language.Name }}" unique-identifier="pub-identifier">
 <metadata>
 <dc:title id="pub-title">{{ site.Title }}</dc:title>
 <dc:language id="pub-language">{{ site.Language.Name }}</dc:language>
@@ -18,7 +18,7 @@ xmlns:dcterms="http://purl.org/dc/terms/" version="3.0" xml:lang="{{ site.Langua
 <manifest>
 <item id="htmltoc" properties="nav" media-type="application/xhtml+xml" href="{{- (resources.Get "toc.xhtml" | resources.ExecuteAsTemplate "toc.xhtml" $.Page).RelPermalink -}}"/>
 {{ with $cover := resources.Get "cover.xhtml" }}
-  <item id="cover" href="{{ (resources.ExecuteAsTemplate "cover.xhtml" $.Page $cover).RelPermalink }}"/>
+  <item id="cover" href="{{ (resources.ExecuteAsTemplate "cover.xhtml" $.Page $cover).RelPermalink }}" media-type="application/xhtml+xml" />
 {{ end }}
 <item id="cover-image" properties="cover-image" media-type="image/jpeg" href="images/cover.jpg"/>
 {{ range site.RegularPages }}

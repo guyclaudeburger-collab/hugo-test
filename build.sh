@@ -1,10 +1,11 @@
 #!/bin/sh
 hugo --minify --cleanDestinationDir
-rsync -r --remove-source-files \
-	--exclude='META-INF/' \
-	--exclude='mimetype' \
-	public/* public/EPUB/
+rsync -r --remove-source-files --exclude='EPUB/' --exclude='mimetype' --exclude='META-INF/' public/ public/EPUB/
 rmdir public/* >/dev/null 2>&1 || true
-zip -X0 ebook.epub public/mimetype
-zip -rX ebook.epub public/EPUB public/META-INF
-find public -type f -exec sed -i 's/\(href\|src\|url\)="\/\(.*\)/\1="\2/g; s/\(href\|src\|url\)=\/\(.*\)/\1=\2/g' {} +
+find public/EPUB -type f -exec sed -i 's|\\(href\\|src\\|url\\)="\\(/.*\\)|\\1=\\2|g' {} +
+rm ebook.epub ebook/ -r
+cd public
+zip -X0 ../ebook.epub mimetype
+zip -rX ../ebook.epub EPUB META-INF
+cd ../
+dtrx ebook.epub -r -o
