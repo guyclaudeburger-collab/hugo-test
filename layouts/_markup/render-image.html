@@ -1,11 +1,8 @@
 {{- $u := urls.Parse .Destination -}}
 {{- $img := "" -}}
-{{- $src := $u.String -}}
-
 {{- if not $u.IsAbs -}}
   {{- with or (.Page.Resources.Get $u.Path) (resources.Get $u.Path) -}}
     {{- $img = . -}}
-    {{- $src = .RelPermalink -}}
   {{- end -}}
 {{- else -}}
   {{ errorf "Absolute URL: %s" .Destination }}
@@ -17,7 +14,7 @@
       {{- with $.Attributes.author }}, <span>{{ . }}</span>{{- end }}
     </figcaption>
   {{- end }}
-  <img src="{{ $src | safeURL }}"
+  <img src="{{ $img.Permalink }}"
        alt="{{ with .Text }}{{ . | htmlUnescape }}{{ else }}See the figcaption{{ end }}"
        {{- with $img }} width="{{ .Width }}" height="{{ .Height }}"{{ end }}>
 </figure>

@@ -1,0 +1,70 @@
+&lt;?xml version="1.0" encoding="utf-8" standalone="no"?>
+<package xmlns="http://www.idpf.org/2007/opf" xmlns:dc="http://purl.org/dc/elements/1.1/"
+xmlns:dcterms="http://purl.org/dc/terms/" version="3.0" xml:lang="en">
+<metadata>
+<dc:title id="pub-title">Ebook-Generator</dc:title>
+<dc:language id="pub-language">en</dc:language>
+<dc:date>3113-03-30</dc:date>
+<meta property="dcterms:modified">3113-03-30T00:120:00Z</meta>
+<meta property="schema:accessMode">textual</meta>
+<meta property="schema:accessMode">visual</meta>
+<meta property="schema:accessModeSufficient">textual,visual</meta>
+<meta property="schema:accessModeSufficient">textual</meta>
+<meta property="schema:accessibilityHazard">none</meta>
+<meta property="schema:accessibilityFeature">tableOfContents</meta>
+<meta property="schema:accessibilityFeature">readingOrder</meta>
+<meta property="schema:accessibilityFeature">alternativeText</meta>
+</metadata>
+<manifest>
+<item id="htmltoc" properties="nav" media-type="application/xhtml+xml" href="/EPUB/toc.xhtml"/>
+
+  <item id="cover" href="/EPUB/cover.xhtml"/>
+
+<item id="cover-image" properties="cover-image" href="/epub/images/cover.jpg" media-type="image/jpeg" />
+
+<item id="e9da2998f2761fd6ea621ed6f57066e6" href="/EPUB/chapter-3.xhtml" media-type="application/xhtml+xml"/>
+
+<item media-type="text/css" id="epubcssepubcss" href="/EPUB/css/epub.css" />
+
+
+
+<item id="image-3jpg" href="/EPUB/chapter-3/image-3.jpg" media-type="image/jpeg"/>
+
+
+<item id="f853dc78ef50272e80634c6789b73a7f" href="/EPUB/chapter-2.xhtml" media-type="application/xhtml+xml"/>
+
+<item media-type="text/css" id="epubcssepubcss" href="/EPUB/css/epub.css" />
+
+
+
+
+<item id="e6e3a14c4c16b9576cdabc9dbfe83552" href="/EPUB/chapter-1.xhtml" media-type="application/xhtml+xml"/>
+
+<item media-type="text/css" id="epubcssepubcss" href="/EPUB/css/epub.css" />
+
+
+
+<item id="image-1-1jpg" href="/EPUB/chapter-1/image-1-1.jpg" media-type="image/jpeg"/>
+
+<item id="image-1-2jpg" href="/EPUB/chapter-1/image-1-2.jpg" media-type="image/jpeg"/>
+
+
+
+<item id="epubimagesimage_8186e-durianjpg" href="/EPUB/images/image_8186e-durian.jpg" media-type="image/jpeg"/>
+
+
+
+
+</manifest>
+<spine>
+<itemref idref="cover" linear="no"/>
+<itemref idref="htmltoc" linear="yes"/>
+"/>
+<itemref idref="e9da2998f2761fd6ea621ed6f57066e6"/>
+"/>
+<itemref idref="f853dc78ef50272e80634c6789b73a7f"/>
+"/>
+<itemref idref="e6e3a14c4c16b9576cdabc9dbfe83552"/>
+
+</spine>
+</package>
