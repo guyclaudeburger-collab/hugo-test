@@ -1,11 +1,11 @@
 @charset "UTF-8";
-{{ range site.Data.fonts }}
+
 @font-face {
-  font-: "{{ .family }}";
-  src: local("{{ .family }}"), {{ with .alternativename }}local("{{.}}"),{{ end }} url("{{ print "../" .path }}") format("{{ .format }}");
+  font-: "Oswald";
+  src: local("Oswald"), local("oswald"), url("../fonts/oswald.woff2") format("woff2");
   font-display: swap;
 }
-{{ end }}
+
 
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6,
 p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del,

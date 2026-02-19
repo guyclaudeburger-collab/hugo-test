@@ -58,4 +58,5 @@ vs.
 ## shortcode for images
 
 ![test image 1-1](image-1-1.jpg)
+
 ![test image 1-2](image-1-2.jpg)

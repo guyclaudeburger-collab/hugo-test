@@ -14,4 +14,4 @@
       {{- end -}}
     {{- end -}}
 {{- end -}}
-  <a href="{{- $destination -}}" {{- if $isRemote -}}rel="external nofollow" target="_blank" {{- with .Title -}}aria-label="{{- . -}}" data-pagefind-index-attrs="aria-label"{{- end -}}{{- end -}}>{{- .Text -}}</a>
+  <a href="{{- $destination -}}" {{ if $isRemote -}}rel="external nofollow" target="_blank" {{ with .Title -}}aria-label="{{ . }}" data-pagefind-index-attrs="aria-label"{{- end -}}{{- end -}}>{{- .Text -}}</a>

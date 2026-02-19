@@ -51,9 +51,8 @@ contentDir = 'content'
       typographer = false
     [markup.goldmark.parser]
       attribute = true
-      autoHeadingID = false
+      wrapStandAloneImageWithinParagraph = false
+      autoHeadingID = true
     [markup.goldmark.renderer]
       hardWraps = false
-      xHTML = true
-[minify]
-  minifyOutput = true
+      xhtml = true

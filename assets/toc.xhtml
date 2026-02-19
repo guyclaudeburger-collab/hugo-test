@@ -11,17 +11,20 @@
 <nav epub:type="toc" id="toc" role="doc-toc">
   <h2>Table of Contents</h2>
   <ol>
-{{ range site.RegularPages }}
+{{- range site.RegularPages -}}
   {{- if or .Title .LinkTitle -}}
-  <li>
-    <a href="{{ .RelPermalink | relURL | replaceRE "^/" "" }}">{{ .Title | default .LinkTitle }}</a>
-    {{- if .TableOfContents -}}
-    {{ .TableOfContents | safeHTML }}
-    {{- end -}}
+  <li><a href="{{ .RelPermalink | relURL | replaceRE "^/" "" }}">{{ .Title | default .LinkTitle }}</a>
+{{- $slug := .Slug -}}
+{{- if .TableOfContents -}}
+  {{ .TableOfContents 
+     | replaceRE `(?s)<nav[^>]*id="TableOfContents"[^>]*>` "" 
+     | replaceRE `(?s)</nav>` ""
+     | replace `href="#` (print `href="` $slug `#`)
+     | safeHTML }}
+{{- end -}}
   </li>
   {{- end -}}
 {{ end }}
   </ol>
 </nav>
-	</body>
-</html>
+</body></html>
