@@ -16,22 +16,22 @@ xmlns:dcterms="http://purl.org/dc/terms/" version="3.0" xml:lang="{{ site.Langua
 <meta property="schema:accessibilityFeature">alternativeText</meta>
 </metadata>
 <manifest>
-<item id="htmltoc" properties="nav" media-type="application/xhtml+xml" href="{{- strings.TrimPrefix "/" (resources.Get "toc.xhtml" | resources.ExecuteAsTemplate "toc.xhtml" $.Page).RelPermalink -}}"/>
+<item id="htmltoc" properties="nav" media-type="application/xhtml+xml" href="{{- (resources.Get "toc.xhtml" | resources.ExecuteAsTemplate "toc.xhtml" $.Page).RelPermalink -}}"/>
 {{ with $cover := resources.Get "cover.xhtml" }}
-  <item id="cover" href="{{ strings.TrimPrefix "/" (resources.ExecuteAsTemplate "cover.xhtml" $.Page $cover).RelPermalink }}"/>
+  <item id="cover" href="{{ (resources.ExecuteAsTemplate "cover.xhtml" $.Page $cover).RelPermalink }}"/>
 {{ end }}
 <item id="cover-image" properties="cover-image" media-type="image/jpeg" href="images/cover.jpg"/>
 {{ range site.RegularPages }}
-<item id="{{ .File.UniqueID }}" href="{{ strings.TrimPrefix "/" .RelPermalink }}" media-type="application/xhtml+xml"/>
+<item id="{{ .File.UniqueID }}" href="{{ .RelPermalink }}" media-type="application/xhtml+xml"/>
 {{ end }}
 {{ range resources.Match "*.css" }}
-<item id="{{ .Name | anchorize }}" href="{{ strings.TrimPrefix "/" .RelPermalink }}" media-type="text/css"/>
+<item id="{{ .Name | anchorize }}" href="{{ .RelPermalink }}" media-type="text/css"/>
 {{ end }}
 {{ range resources.Match "*images*" }}
-<item id="{{ .Name | anchorize }}" href="{{ strings.TrimPrefix "/" .RelPermalink }}" media-type="{{ .MediaType }}"/>
+<item id="{{ .Name | anchorize }}" href="{{ .RelPermalink }}" media-type="{{ .MediaType }}"/>
 {{ end }}
 {{ range resources.Match "*.woff*" }}
-<item id="font-{{ .Name | anchorize }}" href="{{ strings.TrimPrefix "/" .RelPermalink }}" media-type="{{ .MediaType }}"/>
+<item id="font-{{ .Name | anchorize }}" href="{{ .RelPermalink }}" media-type="{{ .MediaType }}"/>
 {{ end }}
 </manifest>
 <spine>

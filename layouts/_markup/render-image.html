@@ -13,7 +13,7 @@
       {{- with $.Attributes.author }}, <span>{{ . }}</span>{{- end }}
     </figcaption>
   {{- end }}
-  <img {{ print `id="` ($img.Name | anchorize) `"` | safeHTMLAttr }} src="{{ strings.TrimPrefix "/" $img.RelPermalink }}"
+  <img {{ print `id="` ($img.Name | anchorize) `"` | safeHTMLAttr }} src="{{ $img.RelPermalink }}"
        alt="{{ with .Text }}{{ . | htmlUnescape }}{{ else }}See the figcaption{{ end }}"
        {{- with $img }} width="{{ .Width }}" height="{{ .Height }}"{{ end }}>
 </figure>
