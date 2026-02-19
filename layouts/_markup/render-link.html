@@ -4,7 +4,7 @@
     {{- $page := .Page.GetPage $destination.Path -}}
     {{- $fragment := $destination.Fragment -}}
     {{- if $page -}}
-      {{- $destination = $page.RelPermalink -}}
+      {{- $destination = $page.Permalink -}}
       {{- with $fragment -}}
         {{- $destination = print $destination "#" $fragment -}}
       {{- end -}}
@@ -14,4 +14,4 @@
       {{- end -}}
     {{- end -}}
 {{- end -}}
-  <a href="{{- $destination -}}" {{- if $isRemote -}}rel="external nofollow" target="_blank" {{- with .Title -}}aria-label="{{- . -}}" data-pagefind-index-attrs="aria-label"{{- end -}}{{- end -}}>{{- .Text -}}</a>
+  <a href="{{- strings.TrimPrefix "/" $destination -}}" {{- if $isRemote -}}rel="external nofollow" target="_blank" {{- with .Title -}}aria-label="{{- . -}}" data-pagefind-index-attrs="aria-label"{{- end -}}{{- end -}}>{{- .Text -}}</a>

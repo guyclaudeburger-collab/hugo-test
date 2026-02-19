@@ -3,8 +3,8 @@ DefaultContentLanguage = "en"
 languageCode = "en-EN"
 title = "Ebook-Generator"
 disableKinds = ["RSS", "robotsTXT", "404", "taxonomy", "section", "term", "sitemap"]
+baseURL = "/"
 uglyurls = true
-relativeurls = true
 disablePathToLower = true
 
 [mediaTypes]
@@ -22,12 +22,11 @@ disablePathToLower = true
   [outputFormats.XHTML]
     mediaType = "application/xhtml+xml"
     isHTML = true
-    path = "EPUB"
     permalinkable = true
   [outputFormats.OPF]
     mediaType = "application/opf+xml"
-    path = "EPUB"
     permalinkable = true
+    isPlainText = true
     baseName = "package"
 
 [outputs]
@@ -54,6 +53,3 @@ contentDir = 'content'
     [markup.goldmark.renderer]
       hardWraps = false
       xHTML = true
-      
-[params]
-  subject = ['HUGO', 'Epub', 'Ebook'] # (optional)

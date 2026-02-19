@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="{{ .Site.Language.Lang }}"
+	lang="{{ .Site.Language.Lang }}">
+	<head>
+		<title>Table of content</title>
+		<link rel="stylesheet" type="text/css" href="css/epub.css" />
+	</head>
+	<body>
+<h1>Table of content</h1>
+<nav epub:type="toc" id="toc" role="doc-toc">
+  <h2>Table of Contents</h2>
+  <ol>
+{{ range site.RegularPages }}
+  {{- if or .Title .LinkTitle -}}
+  <li>
+    <a href="{{ .RelPermalink | relURL | replaceRE "^/" "" }}">{{ .Title | default .LinkTitle }}</a>
+    {{- if .TableOfContents -}}
+    {{ .TableOfContents | safeHTML }}
+    {{- end -}}
+  </li>
+  {{- end -}}
+{{ end }}
+  </ol>
+</nav>
+	</body>
+</html>

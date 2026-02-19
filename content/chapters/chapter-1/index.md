@@ -1,6 +1,7 @@
 ---
 title: "Chapter 1: This is a Resource-Bundle with two images"
 date: 2020-11-01
+Weight: 1
 ---
 
 # h1 Heading

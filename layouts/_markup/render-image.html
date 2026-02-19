@@ -1,7 +1,6 @@
-{{- $u := urls.Parse .Destination -}}
-{{- $img := "" -}}
-{{- if not $u.IsAbs -}}
-  {{- with or (.Page.Resources.Get $u.Path) (resources.Get $u.Path) -}}
+{{- $img := urls.Parse .Destination -}}
+{{- if not $img.IsAbs -}}
+  {{- with or (.Page.Resources.Get $img.Path) (resources.Get $img.Path) -}}
     {{- $img = . -}}
   {{- end -}}
 {{- else -}}
@@ -14,7 +13,7 @@
       {{- with $.Attributes.author }}, <span>{{ . }}</span>{{- end }}
     </figcaption>
   {{- end }}
-  <img src="{{ $img.Permalink }}"
+  <img {{ print $img.Name | anchorize | safeHTMLAttr }} src="{{ strings.TrimPrefix "/" $img.RelPermalink }}"
        alt="{{ with .Text }}{{ . | htmlUnescape }}{{ else }}See the figcaption{{ end }}"
        {{- with $img }} width="{{ .Width }}" height="{{ .Height }}"{{ end }}>
 </figure>

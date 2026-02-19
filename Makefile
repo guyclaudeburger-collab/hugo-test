@@ -1,16 +1,11 @@
 #
 # we assume you already cloned epub
 #
-quickstart:
-	# git clone https://github.com/weitblick/epub.git
-	# cd epub
-	hugo --minify
-	bash ./deploy.sh
-	echo "Your example epub is generated at"
-	echo
-	echo "exampleSite/ebook.epub"
-	echo
-
+build:
+	hugo --minify --cleanDestinationDir
+	rsync -r --remove-source-files --exclude='public/META-INF/' --exclude='public/mimetype' public/* public/EPUB/
+	rmdir public/* >/dev/null 
+	zip -rX ebook.epub public/mimetype public/EPUB public/META-INF
 
 clean:
-	rm -rf exampleSite/*.epub
+	rm -rf ebook.epub public/

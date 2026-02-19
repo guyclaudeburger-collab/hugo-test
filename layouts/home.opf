@@ -16,37 +16,28 @@ xmlns:dcterms="http://purl.org/dc/terms/" version="3.0" xml:lang="{{ site.Langua
 <meta property="schema:accessibilityFeature">alternativeText</meta>
 </metadata>
 <manifest>
-<item id="htmltoc" properties="nav" media-type="application/xhtml+xml" href="{{- (resources.Get "/EPUB/toc.xhtml" | resources.ExecuteAsTemplate "/EPUB/toc.xhtml" $.Page).RelPermalink -}}"/>
-{{ with $cover := resources.Get "EPUB/cover.xhtml" }}
-  <item id="cover" href="{{ (resources.ExecuteAsTemplate "EPUB/cover.xhtml" $.Page $cover).RelPermalink }}"/>
-{{ else }}
-  {{ errorf "No assets/EPUB/cover.xhtml" }}
+<item id="htmltoc" properties="nav" media-type="application/xhtml+xml" href="{{- strings.TrimPrefix "/" (resources.Get "toc.xhtml" | resources.ExecuteAsTemplate "toc.xhtml" $.Page).RelPermalink -}}"/>
+{{ with $cover := resources.Get "cover.xhtml" }}
+  <item id="cover" href="{{ strings.TrimPrefix "/" (resources.ExecuteAsTemplate "cover.xhtml" $.Page $cover).RelPermalink }}"/>
 {{ end }}
-<item id="cover-image" properties="cover-image" href="{{ relURL "epub/images/cover.jpg" }}" media-type="image/jpeg" />
+<item id="cover-image" properties="cover-image" media-type="image/jpeg" href="images/cover.jpg"/>
 {{ range site.RegularPages }}
-<item id="{{ .File.UniqueID }}" href="{{ .RelPermalink }}" media-type="application/xhtml+xml"/>
-{{ range resources.Match "**/*.css" }}
-{{ with resources.ExecuteAsTemplate .Name $.Page . -}}
-  <item media-type="text/css" id="{{ .Name | anchorize }}" href="{{ .RelPermalink }}" />
+<item id="{{ .File.UniqueID }}" href="{{ strings.TrimPrefix "/" .RelPermalink }}" media-type="application/xhtml+xml"/>
 {{ end }}
+{{ range resources.Match "*.css" }}
+<item id="{{ .Name | anchorize }}" href="{{ strings.TrimPrefix "/" .RelPermalink }}" media-type="text/css"/>
 {{ end }}
-{{ range .Resources }}
-<item id="{{ .Name | anchorize }}" href="{{ .RelPermalink }}" media-type="{{ .MediaType }}"/>
+{{ range resources.Match "*images*" }}
+<item id="{{ .Name | anchorize }}" href="{{ strings.TrimPrefix "/" .RelPermalink }}" media-type="{{ .MediaType }}"/>
 {{ end }}
-{{ end }}
-{{ range resources.Match "**/images/**" }}
-<item id="{{ .Name | anchorize }}" href="{{ .RelPermalink }}" media-type="{{ .MediaType }}"/>
-{{ end }}
-{{ range site.Data.fonts }}
-{{ with resources.Get .path }}
-<item id="EPUB.embedded.font.{{ .Name | anchorize }}" href="{{ .RelPermalink }}" media-type="{{ .MediaType }}"/>
-{{ end }}
+{{ range resources.Match "*.woff*" }}
+<item id="font-{{ .Name | anchorize }}" href="{{ strings.TrimPrefix "/" .RelPermalink }}" media-type="{{ .MediaType }}"/>
 {{ end }}
 </manifest>
 <spine>
 <itemref idref="cover" linear="no"/>
 <itemref idref="htmltoc" linear="yes"/>
-{{ range site.RegularPages }}"/>
+{{ range site.RegularPages }}
 <itemref idref="{{ .File.UniqueID }}"/>
 {{ end }}
 </spine>
