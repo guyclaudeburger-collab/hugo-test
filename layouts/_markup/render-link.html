@@ -1,0 +1,17 @@
+{{- $destination := urls.Parse .Destination -}}
+{{- $isRemote := $destination.IsAbs -}}
+{{- if not $isRemote -}}
+    {{- $page := .Page.GetPage $destination.Path -}}
+    {{- $fragment := $destination.Fragment -}}
+    {{- if $page -}}
+      {{- $destination = $page.Permalink -}}
+      {{- with $fragment -}}
+        {{- $destination = print $destination "#" $fragment -}}
+      {{- end -}}
+    {{- else -}}
+      {{- with resources.Get .Destination -}}
+        {{- $destination = .RelPermalink -}}
+      {{- end -}}
+    {{- end -}}
+{{- end -}}
+  <a href="{{- $destination -}}" {{ if $isRemote -}}rel="external nofollow" target="_blank" {{ with .Title -}}aria-label="{{ . }}" data-pagefind-index-attrs="aria-label"{{- end -}}{{- end -}}>{{- .Text -}}</a>
