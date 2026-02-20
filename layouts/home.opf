@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<package xmlns="http://www.idpf.org/2007/opf" xmlns:dc="http://purl.org/dc/elements/1.1/"
+xmlns:dcterms="http://purl.org/dc/terms/" version="3.0" xml:lang="{{ site.Language.Name }}" unique-identifier="pub-identifier">
+<metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+  <dc:title>My Local Book</dc:title>
+  <dc:language>{{ site.Language.Name }}</dc:language>
+  <dc:identifier id="pub-identifier">urn:uuid:550e8400-e29b-41d4-a716-446655440000</dc:identifier>
+  <dc:creator>Me</dc:creator>
+  <meta property="dcterms:modified">2012-10-24T15:30:00Z</meta>
+</metadata>
+<manifest>
+{{- with $cover := resources.Get "cover.xhtml" -}}
+  <item id="cover" href="{{ (resources.ExecuteAsTemplate "cover.xhtml" $.Page $cover).RelPermalink }}" media-type="application/xhtml+xml" />
+{{- end -}}
+<item id="htmltoc" properties="nav" media-type="application/xhtml+xml" href="{{- (resources.Get "toc.xhtml" | resources.ExecuteAsTemplate "toc.xhtml" $.Page).RelPermalink -}}"/>
+<item id="cover-image" properties="cover-image" media-type="image/jpeg" href="images/cover.jpg"/>
+{{- range site.RegularPages -}}
+<item id="{{ .Name | anchorize }}" href="{{ .RelPermalink }}" media-type="application/xhtml+xml"/>
+{{- range .Page.Resources -}}
+<item id="{{ .Name | anchorize }}" href="{{ .RelPermalink }}" media-type="{{ .MediaType }}"/>
+{{- end -}}
+{{- end -}}
+{{- range resources.Match "css/*.css" -}}
+{{- with (resources.ExecuteAsTemplate .Name $.Page .) -}}
+<item id="{{ .Name | anchorize }}" href="{{ .RelPermalink }}" media-type="text/css"/>
+{{- end -}}
+{{- else -}}
+{{- errorf "error no css" -}}
+{{- end -}}
+{{- range union (resources.ByType "image") (union (resources.ByType "video")  (resources.ByType "font")) -}}
+<item id="{{ .Name | anchorize }}" href="{{ .RelPermalink }}" media-type="{{ .MediaType }}"/>
+{{- end -}}
+</manifest>
+<spine>
+<itemref idref="cover" linear="yes"/>
+<itemref idref="htmltoc" linear="yes"/>
+{{- range site.RegularPages -}}
+<itemref idref="{{ .Name | anchorize }}"/>
+{{- end -}}
+</spine>
+</package>

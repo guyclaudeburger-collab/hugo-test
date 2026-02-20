@@ -1,0 +1,12 @@
+{{- $class  := .Attributes.class -}}
+{{ if eq .Type "alert" -}}
+<aside class="{{with .Attributes.Class}}{{.}} {{end}}alert {{ .AlertType }}" role="alert">
+<header>{{ with .AlertTitle }}{{ . }}{{ else }}{{ .AlertType }}{{ end }}</header>
+{{- .Text -}}</aside>
+{{- else -}}{{ $author := .Attributes.author }}
+{{ $cite  := $.Page.RenderString .Attributes.cite }}
+<figure {{ with .Attributes.lang }}lang="{{ . }}"{{ end }} {{ with .Attributes.id }}id="{{ . }}"{{ end }} {{ with $class }}class="{{ . }}"{{ end }}>
+ <blockquote {{ if in $cite "](" }}cite="{{ strings.TrimSuffix ")" (index (last 1 (split $cite "](")) 0) }}"{{ end }}>{{ .Text }}</blockquote><figcaption>
+{{- with $author -}}<span>{{ . }}</span>{{- else with $cite -}}<cite>{{ . }}</cite>{{- else -}}<cite>Ibid</cite>{{- end -}}
+ </figcaption></figure>
+{{- end -}}

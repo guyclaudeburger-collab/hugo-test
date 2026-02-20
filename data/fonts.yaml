@@ -1,0 +1,4 @@
+- path: fonts/oswald.woff2
+  family: Oswald
+  alternativename: oswald
+  format: woff2

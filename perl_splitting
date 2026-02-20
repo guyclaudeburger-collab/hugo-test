@@ -1,0 +1,96 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+use utf8;
+use File::Path qw(make_path);
+use Cwd qw(cwd);
+
+my ($input, $outdir) = @ARGV or die "Usage: $0 book.md output_dir\n";
+my $source_dir = cwd();
+make_path($outdir) unless -d $outdir;
+
+local $/ = undef;
+open my $IN, "<:encoding(UTF-8)", $input or die "Cannot open $input: $!";
+my $text = <$IN>;
+close $IN;
+
+my ($front_matter, $pre_content, $body) = ('', '', $text);
+my $book_title = '';
+
+if ($body =~ s/\A(---\R.*?\R---\R?)//s) {
+    $front_matter = $1;
+    if ($front_matter =~ /^title:\s*(.+?)\s*$/m) {
+        $book_title = $1;
+        $front_matter =~ s/^title:\s*.+?\s*$//m;
+    }
+}
+
+# Split on level-1 headings (ORIGINAL logic)
+my @parts = split(/(^# .*\R)/m, $body);
+if (@parts && $parts[0] !~ /^# /) {
+    $pre_content = shift @parts;
+    my $check = $pre_content;
+    $check =~ s/^\s+|\s+$//g;
+    $pre_content = $check =~ /\S/ ? ($pre_content =~ s/\n{3,}/\n\n/gr) : '';
+}
+
+sub write_file {
+    my ($path, $content) = @_;
+	$content =~ s/^##/#/gm;
+	open my $FH, ">:encoding(UTF-8)", $path or die "Cannot write $path: $!";
+    $content =~ s/\n+\z/\n/;
+    print $FH $content;
+    close $FH;
+}
+
+if ($book_title) {
+    for my $config ($source_dir . '/hugo.toml', $source_dir . '/hugo.yaml', $source_dir . '/hugo.yml') {
+        next unless -f $config;
+        local $/ = undef;
+        open my $CFG, "<:encoding(UTF-8)", $config or next;
+        my $content = <$CFG>;
+        close $CFG;
+        
+        if ($config =~ /\.ya?ml$/ || $content =~ /^---/) {
+            $content =~ s/^title:.*$/title: "$book_title"/m;
+            $content =~ s/^---\n/---\ntitle: "$book_title"\n/gm unless $content =~ /^title:/m;
+        } else {
+            $content =~ s/^title\s*=.*$/title = "$book_title"/m;
+            $content .= "\ntitle = \"$book_title\"" unless $content =~ /^title\s*=/m;
+        }
+        open my $OUTCFG, ">:encoding(UTF-8)", $config or die "Cannot write $config: $!";
+        print $OUTCFG $content;
+        close $OUTCFG;
+        last;
+    }
+}
+
+if ($pre_content) {
+    my $fm;
+    if ($front_matter) {
+        my @lines = grep !/^(?:weight:|^\s*$|---$)/i, split(/\R/, $front_matter);
+        my $body = join('', map {"$_\n"} @lines);
+        $fm = "---\n$body";
+        $fm =~ s/\n+\z/\n/;
+        $fm .= "weight: -10\n---\n\n";
+    } else {
+        $fm = "---\ntitle: \"Preface\"\nweight: -10\n---\n\n";
+    }
+    $pre_content =~ s/^\n+//;
+    write_file("$outdir/preface.md", $fm . $pre_content);
+}
+
+exit unless @parts;
+my $weight = 1;
+while (@parts) {
+    my $heading = shift @parts // next;
+    my $content = shift @parts // '';
+    next unless $heading =~ /^# /;
+    
+    (my $title = $heading) =~ s/^#\s+//;
+    $title =~ s/\R$//;
+    $content =~ s/^\n+//;
+    my $chapter = "---\ntitle: \"$title\"\nweight: $weight\n---\n\n$content";
+    write_file("$outdir/chapter_$weight.md", $chapter);
+    $weight++;
+}

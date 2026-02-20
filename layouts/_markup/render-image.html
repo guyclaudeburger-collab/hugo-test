@@ -1,0 +1,19 @@
+{{- $img := urls.Parse .Destination -}}
+{{- if not $img.IsAbs -}}
+  {{- with or (.Page.Resources.Get $img.Path) (resources.Get $img.Path) -}}
+    {{- $img = . -}}
+  {{- end -}}
+{{- else -}}
+  {{ errorf "Absolute URL: %s" .Destination }}
+{{- end -}}
+<figure {{ with .Attributes.id }}id="{{ . }}"{{ end }} {{ with .Attributes.class }}class="{{ . }}"{{ end }}>
+  {{- with .Title -}}
+    <figcaption>{{ . | $.Page.RenderString }}
+      {{- with $.Attributes.cite }}, <cite>{{ . | $.Page.RenderString }}</cite>{{- end }}
+      {{- with $.Attributes.author }}, <span>{{ . }}</span>{{- end }}
+    </figcaption>
+  {{- end }}
+  <img {{ print `id="` ($img.Name | anchorize) `"` | safeHTMLAttr }} src="{{ $img.RelPermalink }}"
+       alt="{{ with .Text }}{{ . | htmlUnescape }}{{ else }}See the figcaption{{ end }}"
+       {{- with $img }} width="{{ .Width }}" height="{{ .Height }}"{{ end }}></img>
+</figure>
