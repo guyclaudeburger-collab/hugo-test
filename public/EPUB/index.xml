@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>my title</title>
+    <link>/</link>
+    <description>Recent content on my title</description>
+    <generator>Hugo</generator>
+    <language>en-EN</language>
+    <lastBuildDate>Tue, 03 Nov 2020 00:00:00 +0000</lastBuildDate>
+    <atom:link href="index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Chapter 1: This is a Resource-Bundle with two images</title>
+      <link>/chapter-1/</link>
+      <pubDate>Sun, 01 Nov 2020 00:00:00 +0000</pubDate>
+      <guid>/chapter-1/</guid>
+      <description>&lt;h1 id=&#34;h1-heading&#34;&gt;h1 Heading&lt;/h1&gt;&#xA;&lt;h2 id=&#34;h2-heading&#34;&gt;h2 Heading&lt;/h2&gt;&#xA;&lt;h3 id=&#34;h3-heading&#34;&gt;h3 Heading&lt;/h3&gt;&#xA;&lt;h4 id=&#34;h4-heading&#34;&gt;h4 Heading&lt;/h4&gt;&#xA;&lt;h5 id=&#34;h5-heading&#34;&gt;h5 Heading&lt;/h5&gt;&#xA;&lt;h6 id=&#34;h6-heading&#34;&gt;h6 Heading&lt;/h6&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;&lt;strong&gt;This is bold text&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;This is bold text&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;This is italic text&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;This is italic text&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;del&gt;Deleted text&lt;/del&gt;&lt;/p&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;Heading&lt;/th&gt;&#xA;          &lt;th&gt;Another heading&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;text&lt;/td&gt;&#xA;          &lt;td&gt;text&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;text&lt;/td&gt;&#xA;          &lt;td&gt;text&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;text&lt;/td&gt;&#xA;          &lt;td&gt;text&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Block quotes are&#xA;written like so.&lt;/p&gt;&#xA;&lt;p&gt;They can span multiple paragraphs,&#xA;if you like.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;Some text, and some &lt;code&gt;code&lt;/code&gt; and then a nice plain &lt;a href=&#34;https://weitblick.org&#34; title=&#34;title text!&#34;&gt;link with title&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;And a &lt;a href=&#34;/chapter-2/&#34;&gt;local link to another chapter&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Chapter 3: Chapter order is default reverse</title>
+      <link>/chapter-3/</link>
+      <pubDate>Tue, 03 Nov 2020 00:00:00 +0000</pubDate>
+      <guid>/chapter-3/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;You can use &lt;code&gt;weight&lt;/code&gt; (descending) or &lt;code&gt;date&lt;/code&gt; (ascending) in frontmatter for sorting the chapters (see &lt;a href=&#34;https://gohugo.io/templates/lists/#order-content&#34;&gt;order content&lt;/a&gt;)&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Chapter 2: Simple chapter without images</title>
+      <link>/chapter-2/</link>
+      <pubDate>Mon, 02 Nov 2020 00:00:00 +0000</pubDate>
+      <guid>/chapter-2/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;images/image_8186e-durian.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

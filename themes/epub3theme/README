@@ -1,0 +1,9 @@
+1. if not done already, in your project root directory: `gh repo clone guyclaudeburger-collab/epub3theme themes/epub3theme`
+1. Add `theme = ["epub3theme"]` to your config (if in toml, change it otherwise)
+
+
+I tried to make it the least intrusive I could. Direct descendents of content/ become chapters. You can write chapters immediately under content. Single pages or leaf bundles work, as well as page resources. Inclusion is transparent: names are looked for in local resources first, then global assets.
+Only requirement: css to css/, fonts to fonts/. Subdirectories are fine. That allows the necessary registration of resources. Images and videos can go to images/. New fonts also require editing data/fonts.yaml.
+Because of this registration, static resources can not be used as, but it is **fully automatic** (one had to edit it manually with the original theme): Place resources under assets, use them.
+
+if you have one single md file with level one headings (#), place it in your root, go to the theme and do "make split": it divides your book in as many chapters as there are level 1 headings, named chapter-1 and so forth, plus preface.md for what remains before the first heading, all with matching weights. Plus, your project's title becomes your book's, if present in its frontmatter.
