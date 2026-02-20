@@ -37,7 +37,7 @@ disablePathToLower = true
 
 [permalinks]
 contentDir = 'content'
-"chapters" = '/:slugorcontentbasename/'
+"/" = '/:slugorcontentbasename/'
   
 [markup]
   [markup.goldmark]
