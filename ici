@@ -1,8 +1,0 @@
-To https://github.com/guyclaudeburger-collab/hugo-test.git
- ! [rejected]        main -> main (fetch first)
-erreur : impossible de pousser des références vers 'https://github.com/guyclaudeburger-collab/hugo-test.git'
-astuce : Les mises à jour ont été rejetées car le distant contient du travail que vous
-astuce : n'avez pas localement. La cause probable est que quelqu'un a déjà poussé sur la même réf.
-astuce : depuis un autre dépôt. Si vous souhaitez intégrer les changements distants,
-astuce : "utilisez 'git pull' avant de pousser à nouveau.
-astuce : Voir la 'Note à propos des avances rapides' dans 'git push --help' pour plus d'information.
