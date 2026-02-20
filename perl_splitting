@@ -5,7 +5,7 @@ use utf8;
 use File::Path qw(make_path);
 use Cwd qw(cwd);
 
-my ($input, $outdir) = @ARGV or die "Usage: $0 master.md output_dir\n";
+my ($input, $outdir) = @ARGV or die "Usage: $0 book.md output_dir\n";
 my $source_dir = cwd();
 make_path($outdir) unless -d $outdir;
 
